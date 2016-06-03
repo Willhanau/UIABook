@@ -19,6 +19,13 @@ public class MouseLook : MonoBehaviour {
 
 	private float _rotationX = 0;
 
+	void start() {
+		Rigidbody body = GetComponent<Rigidbody> ();
+		if (body != null){
+			body.freezeRotation = true;
+		}
+	}
+
 	void Update () {
 		if (axes == RotationAxes.MouseX){
 			//horizontal rotation here
@@ -35,6 +42,13 @@ public class MouseLook : MonoBehaviour {
 		}
 		else {
 			//both horizontal and vertical rotation here
+			_rotationX -= Input.GetAxis("Mouse Y") * SensitivityVert;
+			_rotationX = Mathf.Clamp (_rotationX, minimumVert, maximumVert);
+
+			float delta = Input.GetAxis ("Mouse X") * SensitivityHori;
+			float rotationY = transform.localEulerAngles.y + delta;
+
+			transform.localEulerAngles = new Vector3 (_rotationX, rotationY, 0);
 		}
 	}
 
