@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Chapter2and3.unity
-  isLoaded: 1
-  isActive: 1
